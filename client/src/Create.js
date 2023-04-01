@@ -54,7 +54,6 @@ const Create = () => {
         <div className="container p-5">
             <h1> Create Blog Post</h1>
             <br />
-            {JSON.stringify(state)}
             <form onSubmit={handleSubmit}>
                 <div className='form-group'>
                     <label className='text-muted'>Title</label>
