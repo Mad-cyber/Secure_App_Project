@@ -15,10 +15,10 @@ NCI Smart Login Blog Appliciation for secure  programming
 ### 2. Install file dependencies 
 -  `npm install express`
 - `npm install nodemon`
-### 3. Open your command prompt and "cd to the client folder"
+### 3. Open your command prompt and `cd to the client folder`
 - `npm start`
 - This will run the client server and open the Blog application 
-- Once the application is running Open your command prompt and "cd to the server folder"
+- Once the application is running, Open your command prompt and `cd to the server folder`
 - `npm start`
 - This will allow the backend api connection for the MongoDb Atlas database for the blog post creation 
 ### 4. The Blog Application will open on local host of your machine
