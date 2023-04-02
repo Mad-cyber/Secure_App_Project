@@ -24,6 +24,38 @@ exports.create = async (req, res) => {
     }
   }
 };
-    // res.json ({
-    //     message: 'Success! See your server console'
+// res.json ({
+//     message: 'Success! See your server console'
+
+exports.list = (req, res) => {
+  Post.find({})
+    .limit(10)
+    .sort({ createdAt: -1 })
+    .then((blogs) => {
+      res.json(blogs);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'Server error' });
+    });
+};
+
+
+  // .limit(10)
+  // .sort({ createdAt: -1 })
+  // .exec((err, blog) => {
+  //   if (err) {
+  //     console.error(err);
+  //     res.status(500).json({ error: 'Server error' });
+  //   }
+  //   res.json(blog);
+  // });
+
+
+
+
+
+
+
+
 
