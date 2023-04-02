@@ -4,6 +4,7 @@ import App from "./App";
 import Create from "./Create";
 import SinglePost from "./SinglePost";
 import UpdatePost from "./UpdatePost";
+import Login from "./Login";
 
 
 //creating browser routes from react dom and client folder https://v5.reactrouter.com/web/example/basic
@@ -13,6 +14,7 @@ const Routes = () => {
             <Switch>
                 <Route path="/" exact component={App} />
                 <Route path="/create" exact component={Create} />
+                <Route path="/login" exact component={Login} />
                 <Route path="/posts/:slug" exact component={SinglePost} />
                 <Route path="/posts/update/:slug" exact component={UpdatePost} />
 

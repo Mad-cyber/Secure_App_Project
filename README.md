@@ -26,7 +26,7 @@ NCI Smart Login Blog Appliciation for secure  programming
 
 ---
 ## [This branch shows the unsecure version of the application based on OWASP Top Ten](https://owasp.org/www-project-top-ten/)
--   **Identification and authentication failures** - This application has no version of User roles of login features allowing any one with access to the URL to use the application.
+-   **Identification and authentication failures** - This application has no version of User roles or login features allowing any one with access to the URL to use the application. This is unsafe and give no safety for users or the owners of the applications
 - **Injection** - with no login features or security implementation the application is open to SQL injection attacks
 - **Server-side request forgery** - no JWT tokens set to prevent attackers opening the application to an unexpected destination. Also, allowing possible remote sessions. No validation of user tokens and nothing to validate the URL.
 - **Insecure design** -  outdated variables and features in the application 
