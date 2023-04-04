@@ -5,6 +5,7 @@ import Create from "./Create";
 import SinglePost from "./SinglePost";
 import UpdatePost from "./UpdatePost";
 import Login from "./Login";
+import PrivateRoute from "./PrivateRoute";
 
 
 //creating browser routes from react dom and client folder https://v5.reactrouter.com/web/example/basic
@@ -13,10 +14,10 @@ const Routes = () => {
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={App} />
-                <Route path="/create" exact component={Create} />
+                <PrivateRoute path="/create" exact component={Create} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/posts/:slug" exact component={SinglePost} />
-                <Route path="/posts/update/:slug" exact component={UpdatePost} />
+                <PrivateRoute path="/posts/update/:slug" exact component={UpdatePost} />
 
 
             </Switch>
