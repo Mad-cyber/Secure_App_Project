@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Nav from './Nav';
+import { getToken } from './helpers';
 
 const UpdatePost = (props) => {
     const [state, setState] = useState({
@@ -33,7 +34,12 @@ const UpdatePost = (props) => {
         Event.preventDefault()
         //console.table({title, content, user});
 
-        axios.put(`${process.env.REACT_APP_API}/posts/${slug}`, { title, content, user })
+        axios.put(`${process.env.REACT_APP_API}/posts/${slug}`, { title, content, user }, {
+            headers: {
+                authorization: `Bearer ${getToken()} ` 
+            }
+
+        })
         .then(response => {
             if (response && response.data) {
                 console.log(response)

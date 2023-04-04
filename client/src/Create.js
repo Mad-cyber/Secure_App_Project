@@ -1,99 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Nav from './Nav';
-
+import {getUser, getToken } from './helpers';
+//import ReactQuill from 'react-quill';
+//import 'react-quill/dist/quill.bubble.css';
 
 const Create = () => {
-
+    // state
     const [state, setState] = useState({
-        //default  for the event listener for the form submisson
         title: '',
         content: '',
         user: ''
-    })
-
-    //destrcute value from state
+    });
+    // destructure values from state
     const { title, content, user } = state;
 
-    // state.title
-    // state.content
-    //https://github.com/axios/axios taken from github
-    //onChange event handler
-    const handleChange = (name) => (Event) => {
-        console.log('name', name, 'event', Event.target.value);
-        setState({ ...state, [name]: Event.target.value })
-    }
+    // onchange event handler
+    const handleChange = name => event => {
+        // console.log('name', name, 'event', event.target.value);
+        setState({ ...state, [name]: event.target.value });
+    };
 
-    const handleSubmit = Event => {
-        Event.preventDefault()
-        //console.table({title, content, user});
-
+    const handleSubmit = event => {
+        event.preventDefault();
+        // console.table({ title, content, user });
         axios
-        // taken from env file with local host added as REACT_APP_API
-            .post(`${process.env.REACT_APP_API}/posts`, { title, content, user })
-            //.post('http://localhost:8000/api/posts', { title, content, user })
+            .post
+            (`${process.env.REACT_APP_API}/posts`, { title, content, user }, {
+                headers: {
+                    authorization: `Bearer ${getToken()} ` 
+                }
+
+
+            }
+            
+            )
             .then(response => {
-
-                console.log(response)
-
-                //  empty the state after submission    
-                setState({ ...state, title: '', content: '', user: '' })
-                //show success alert from the submission 
-                alert(`Blog Post ${response.data.title} is created`)
-
+                console.log(response);
+                // empty state
+                setState({ ...state, title: '', content: '', user: '' });
+                // show sucess alert
+                alert(`Post titled ${response.data.title} is created`);
             })
-
             .catch(error => {
-                console.log(error.response)
-                alert(error.response.data.error)
-            })
-
-    }
+                console.log(error.response);
+                alert(error.response.data.error);
+            });
+    };
 
     return (
-
         <div className="container pb-5">
-            <Nav/>
-            <h1> Create Blog Post</h1>
+            <Nav />
             <br />
-            <form onSubmit={handleSubmit}>
-                <div className='form-group'>
-                    <label className='text-muted'>Title</label>
-                    <input onChange={handleChange('title')} value={title} type="text" className='form-control' placeholder="Blog Post Title" required />
-                </div>
+            <h1>CREATE POST</h1>
+            <br />
 
-                <div className='form-group'>
-                    <label className='text-muted'>Blog Content</label>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label className="text-muted">Title</label>
+                    <input
+                        onChange={handleChange('title')}
+                        value={title}
+                        type="text"
+                        className="form-control"
+                        placeholder="Post title"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label className="text-muted">Content</label>
                     <textarea
                         onChange={handleChange('content')}
                         value={content}
                         type="text"
-                        className='form-control'
-                        placeholder="Write Blog Post Content"
+                        className="form-control"
+                        placeholder="Write something.."
                         required
                     />
                 </div>
-
-                <div className='form-group'>
-                    <label className='text-muted'>User</label>
-                    <input onChange={handleChange('user')} value={user} type="text" className='form-control' placeholder="Blog Writer" required />
+                <div className="form-group">
+                    <label className="text-muted">User</label>
+                    <input
+                        onChange={handleChange('user')}
+                        value={user}
+                        type="text"
+                        className="form-control"
+                        placeholder="Your name"
+                        required
+                    />
                 </div>
-
                 <div>
-                    <button className="btn btn-primary"> Create Blog Post </button>
-
+                    <button className="btn btn-primary">Create</button>
                 </div>
-
             </form>
-
         </div>
-
     );
-
-
-}
-
-
-
+};
 
 export default Create;

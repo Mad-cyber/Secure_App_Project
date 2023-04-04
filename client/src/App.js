@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Nav from './Nav';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { getUser,getToken } from './helpers';
 
 const App = () => {
     const [blogs, setBlogs] = useState([]);
@@ -32,7 +33,13 @@ const App = () => {
 
     const deletePost = (slug) => {
         //console.log('delete', slug, ' blog post' );
-        axios.delete(`${process.env.REACT_APP_API}/posts/${slug}`)
+        axios
+        .delete(`${process.env.REACT_APP_API}/posts/${slug}`, {
+            headers: {
+                authorization: `Bearer ${getToken()} ` 
+            }
+        }
+        )
         .then(response => {
             alert(response.data.message)
             fetchBlogs()
@@ -62,6 +69,8 @@ const App = () => {
                                 </p>
                             </div>
 
+
+                            {getUser() && (
                             <div className="col-md-2">
                                 <Link to={`/posts/update/${posts.slug}`} className="btn btn-warning">
                                     Update
@@ -71,6 +80,8 @@ const App = () => {
                                 className="btn btn-danger"> 
                                 Delete</button>
                             </div>
+                            )}
+
                         </div>
                     </div>
                     </div>
